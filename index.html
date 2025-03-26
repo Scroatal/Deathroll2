@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deathroll</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+        "three": "https://unpkg.com/three@0.150.1/build/three.module.js"
+        }
+    }
+    </script>
+</head>
+<body>
+    <canvas id="bg"></canvas>
+    <h1>Deathroll</h1>
+    <div id="game">
+        <button id="restart" style="display: none;">Play Again</button>
+        <div id="players">
+            <div class="player">
+                <h2>Player 1</h2>
+                <p id="player1Number">500</p>
+                <p id="player1Roll">Last Roll: -</p>
+            </div>
+            <div class="player">
+                <h2>Player 2</h2>
+                <p id="player2Number">500</p>
+                <p id="player2Roll">Last Roll: -</p>
+            </div>
+        </div>
+        <p id="turn">Turn: Player 1</p>
+        <button id="roll">Roll</button>
+        <div id="rollResult"></div>
+    </div>
+    <script src="script.js" type="module"></script>
+</body>
+</html>

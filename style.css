@@ -1,0 +1,134 @@
+/* 90s Retro Style */
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff00ff 0%, #00ffff 100%);
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+    overflow: hidden;
+}
+
+#game {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 20px;
+    border: 5px solid #ffff00;
+    box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
+    z-index: 10;
+    position: relative;
+}
+
+#players {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.player {
+    width: 40%;
+    padding: 20px;
+    margin: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 3px solid #00ff00;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #ffff00;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #00ffff;
+}
+
+#player1Number, #player2Number {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #ff00ff;
+    margin: 10px 0;
+}
+
+#player1Roll, #player2Roll {
+    font-size: 1.2em;
+    color: #ffff00;
+}
+
+#turn {
+    font-size: 1.5em;
+    margin: 20px 0;
+    color: #00ffff;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 1.5em;
+    background: linear-gradient(to bottom, #ff00ff 0%, #9900cc 100%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(255, 0, 255, 0.4);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff00ff;
+}
+
+#rollResult {
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #ffff00;
+    text-transform: uppercase;
+    animation: blink 1s infinite alternate;
+}
+
+#restart {
+    display: none;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    background: linear-gradient(to bottom, #00ff00 0%, #009900 100%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.4);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    margin: 20px auto;
+}
+
+#restart:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #00ff00;
+}
+
+@keyframes blink {
+    from { opacity: 1; }
+    to { opacity: 0.5; }
+}
+
+/* Make canvas full screen behind content */
+#bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
