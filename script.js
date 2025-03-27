@@ -2,18 +2,20 @@ import * as THREE from 'three';
 import { OrbitControls } from 'https://unpkg.com/three@0.150.1/examples/jsm/controls/OrbitControls.js';
 
 // Game elements
-const player1NumberDisplay = document.getElementById('player1Number');
-const player2NumberDisplay = document.getElementById('player2Number');
 const player1RollDisplay = document.getElementById('player1Roll');
 const player2RollDisplay = document.getElementById('player2Roll');
 const turnDisplay = document.getElementById('turn');
 const rollButton = document.getElementById('roll');
 const rollResultDisplay = document.getElementById('rollResult');
+const restartButton = document.getElementById('restart'); // Added reference for restart button
 
-let player1Number = 500;
-let player2Number = 500;
 let currentPlayer = 1;
 let currentMaxRoll = 500;
+
+// Function to update roll button text
+function updateRollButtonText() {
+    rollButton.textContent = `Roll out of ${currentMaxRoll}`;
+}
 
 // Three.js setup
 const canvas = document.getElementById('bg');
@@ -66,7 +68,7 @@ scene.add(particlesMesh);
 
 // Create dice
 const diceGeometry = new THREE.BoxGeometry(5, 5, 5);
-const diceMaterial = new THREE.MeshPhongMaterial({ 
+const diceMaterial = new THREE.MeshPhongMaterial({
     color: 0xff0000,
     shininess: 100,
     specular: 0xffffff
@@ -77,15 +79,15 @@ scene.add(dice);
 // Animation loop
 function animate() {
     requestAnimationFrame(animate);
-    
+
     // Rotate particles
     particlesMesh.rotation.x += 0.0005;
     particlesMesh.rotation.y += 0.0005;
-    
+
     // Rotate dice
     dice.rotation.x += 0.01;
     dice.rotation.y += 0.01;
-    
+
     controls.update();
     renderer.render(scene, camera);
 }
@@ -99,17 +101,14 @@ window.addEventListener('resize', () => {
 });
 
 // Game logic
-player1NumberDisplay.textContent = currentMaxRoll;
-player2NumberDisplay.textContent = currentMaxRoll;
+updateRollButtonText(); // Set initial button text
 
 rollButton.addEventListener('click', () => {
     let roll;
     if (currentPlayer === 1) {
         roll = Math.floor(Math.random() * currentMaxRoll) + 1;
-        player1Number = roll;
-        player1NumberDisplay.textContent = player1Number;
         player1RollDisplay.textContent = `Last Roll: ${roll}`;
-        
+
         rollResultDisplay.textContent = `Player 1 rolled out of ${currentMaxRoll} and got ${roll}`;
         currentMaxRoll = roll;
 
@@ -118,22 +117,20 @@ rollButton.addEventListener('click', () => {
         dice.scale.set(1.5, 1.5, 1.5);
         setTimeout(() => dice.scale.set(1, 1, 1), 500);
 
-        if (player1Number === 1) {
+        if (roll === 1) { // Check against roll, not player1Number
             rollResultDisplay.textContent = 'Player 1 loses!';
-            document.getElementById('restart').style.display = 'block';
+            restartButton.style.display = 'block';
             rollButton.style.display = 'none';
             return;
         }
 
         currentPlayer = 2;
         turnDisplay.textContent = 'Turn: Player 2';
-        player2NumberDisplay.textContent = currentMaxRoll;
+        updateRollButtonText(); // Update button text for Player 2
     } else {
         roll = Math.floor(Math.random() * currentMaxRoll) + 1;
-        player2Number = roll;
-        player2NumberDisplay.textContent = player2Number;
         player2RollDisplay.textContent = `Last Roll: ${roll}`;
-        
+
         rollResultDisplay.textContent = `Player 2 rolled out of ${currentMaxRoll} and got ${roll}`;
         currentMaxRoll = roll;
 
@@ -142,33 +139,30 @@ rollButton.addEventListener('click', () => {
         dice.scale.set(1.5, 1.5, 1.5);
         setTimeout(() => dice.scale.set(1, 1, 1), 500);
 
-        if (player2Number === 1) {
+        if (roll === 1) { // Check against roll, not player2Number
             rollResultDisplay.textContent = 'Player 2 loses!';
-            document.getElementById('restart').style.display = 'block';
+            restartButton.style.display = 'block';
             rollButton.style.display = 'none';
             return;
         }
 
         currentPlayer = 1;
         turnDisplay.textContent = 'Turn: Player 1';
-        player1NumberDisplay.textContent = currentMaxRoll;
+        updateRollButtonText(); // Update button text for Player 1
     }
 });
 
 // Restart game
-document.getElementById('restart').addEventListener('click', () => {
-    player1Number = 500;
-    player2Number = 500;
+restartButton.addEventListener('click', () => {
     currentPlayer = 1;
     currentMaxRoll = 500;
-    
-    player1NumberDisplay.textContent = currentMaxRoll;
-    player2NumberDisplay.textContent = currentMaxRoll;
+
     player1RollDisplay.textContent = 'Last Roll: -';
     player2RollDisplay.textContent = 'Last Roll: -';
     turnDisplay.textContent = 'Turn: Player 1';
     rollResultDisplay.textContent = '';
-    
-    document.getElementById('restart').style.display = 'none';
+
+    restartButton.style.display = 'none';
     rollButton.style.display = 'block';
+    updateRollButtonText(); // Update button text on restart
 });
