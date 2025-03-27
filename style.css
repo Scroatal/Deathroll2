@@ -100,7 +100,7 @@ button:hover {
 }
 
 #rollResult {
-    font-size: 1.5em;
+    font-size: 1em;
     margin-top: 20px;
     color: #ffff00;
     text-transform: uppercase;
