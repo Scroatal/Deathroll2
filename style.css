@@ -2,8 +2,9 @@
 body {
     font-family: 'Comic Sans MS', cursive, sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: flex-start; /* Align children to the top */
+    align-items: center; /* Center children horizontally */
     min-height: 100vh;
     background: linear-gradient(135deg, #ff00ff 0%, #00ffff 100%);
     color: #fff;
@@ -131,4 +132,51 @@ button:hover {
     top: 0;
     left: 0;
     z-index: -1;
+}
+
+@media (max-width: 600px) {
+    body {
+        /* Allow scrolling if content overflows */
+        overflow: auto;
+        padding-top: 20px; /* Add some space at the top */
+        /* flex-direction and align-items are now handled globally */
+    }
+
+    #game {
+        padding: 20px;
+        margin: 10px; /* Add margin so it doesn't touch screen edges */
+        width: auto; /* Allow it to shrink */
+    }
+
+    #players {
+        flex-direction: column; /* Stack player boxes */
+        align-items: center; /* Center them horizontally */
+    }
+
+    .player {
+        width: 90%; /* Make player boxes wider */
+        margin: 10px 0; /* Adjust margin for vertical stacking */
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2em; /* Reduce heading size */
+    }
+
+    #player1Number, #player2Number {
+        font-size: 2em; /* Reduce number size */
+    }
+
+    button, #restart {
+        padding: 12px 25px; /* Slightly smaller buttons */
+        font-size: 1.2em;
+    }
+
+    #turn {
+        font-size: 1.2em;
+    }
+
+    #rollResult {
+        font-size: 1.2em;
+    }
 }
